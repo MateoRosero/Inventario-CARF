@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% block title %}{{ accion }}{% endblock %}
+{% block content %}
+  <h1>{{ accion }}</h1>
+  <form method="POST">
+    {{ form.hidden_tag() }}
+    <div class="mb-3">
+      {{ form.producto.label(class="form-label") }}
+      {{ form.producto(class="form-select") }}
+    </div>
+    <div class="mb-3">
+      {{ form.tipo.label(class="form-label") }}
+      {{ form.tipo(class="form-select") }}
+    </div>
+    <div class="mb-3">
+      {{ form.cantidad.label(class="form-label") }}
+      {{ form.cantidad(class="form-control") }}
+    </div>
+    <button type="submit" class="btn btn-success">{{ accion }}</button>
+    <a href="{{ url_for('lista_inventario') }}" class="btn btn-secondary">Cancelar</a>
+  </form>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block title %}Reporte de Inventario{% endblock %}
+{% block content %}
+  <h1>Reporte de Inventario</h1>
+  <canvas id="inventarioChart" width="400" height="200"></canvas>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script>
+    fetch('{{ url_for("inventario_data") }}')
+      .then(res => res.json())
+      .then(data => {
+        const ctx = document.getElementById('inventarioChart').getContext('2d');
+        new Chart(ctx, {
+          type: 'bar',
+          data: {
+            labels: data.etiquetas,
+            datasets: [{
+              label: 'Cantidad en Inventario',
+              data: data.valores
+            }]
+          }
+        });
+      });
+  </script>
+{% endblock %}

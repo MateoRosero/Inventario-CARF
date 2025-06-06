@@ -1,0 +1,25 @@
+# Ignora el entorno virtual
+venv/
+
+# Ignora archivos de caché de Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Ignora bases de datos locales
+*.db
+*.sqlite3
+
+# Ignora archivos de configuración sensibles
+.env
+instance/
+
+# Ignora logs
+*.log
+
+# Ignora versiones de migraciones (opcional, si no quieres subir los scripts de migración)
+migrations/versions/
+
+# Ignora archivos subidos (si usas uploads)
+static/uploads/
