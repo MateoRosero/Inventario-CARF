@@ -46,8 +46,23 @@ def eliminar_categoria(id):
 # --------- RUTAS DE PRODUCTO ---------
 @app.route('/productos')
 def listar_productos():
-    productos = Producto.query.all()
-    return render_template('productos_list.html', productos=productos)
+    categoria_id = request.args.get('categoria', type=int)
+    busqueda = request.args.get('q', '', type=str)
+
+    # Consulta base
+    query = Producto.query
+
+    # Filtro por categoría
+    if categoria_id:
+        query = query.filter_by(categoria_id=categoria_id)
+
+    # Búsqueda por nombre
+    if busqueda:
+        query = query.filter(Producto.nombre.ilike(f'%{busqueda}%'))
+
+    productos = query.all()
+    categorias = Categoria.query.all()
+    return render_template('productos_list.html', productos=productos, categorias=categorias, categoria_id=categoria_id, busqueda=busqueda)
 
 @app.route('/producto/nuevo', methods=['GET','POST'])
 def crear_producto():
